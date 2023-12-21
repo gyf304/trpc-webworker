@@ -1,0 +1,49 @@
+{
+  "name": "trpc-webworker",
+  "version": "0.1.0",
+  "files": [
+    "dist/esm",
+    "dist/cjs"
+  ],
+  "exports": {
+    "./server.js": {
+      "require": "./dist/cjs/server.js",
+      "import": "./dist/esm/server.js",
+      "types": "./dist/esm/server.d.ts"
+    },
+    "./server": {
+      "require": "./dist/cjs/server.js",
+      "import": "./dist/esm/server.js",
+      "types": "./dist/esm/server.d.ts"
+    },
+    "./client.js": {
+      "require": "./dist/cjs/client.js",
+      "import": "./dist/esm/client.js",
+      "types": "./dist/esm/client.d.ts"
+    },
+    "./client": {
+      "require": "./dist/cjs/client.js",
+      "import": "./dist/esm/client.js",
+      "types": "./dist/esm/client.d.ts"
+    }
+  },
+  "devDependencies": {
+    "@trpc/client": "^10.44.1",
+    "@trpc/server": "^10.44.1",
+    "bun-types": "latest",
+    "zod": "^3.22.4"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0",
+    "@trpc/server": ">10.0.0",
+    "@trpc/client": ">10.0.0"
+  },
+  "scripts": {
+    "compile:esm": "tsc --project tsconfig.dist.esm.json",
+    "compile:cjs": "tsc --project tsconfig.dist.cjs.json",
+    "compile": "bun run compile:esm && bun run compile:cjs",
+    "prepack": "bun run compile",
+    "build:demo": "bun build ./demo/src/worker.ts --outdir ./demo/dist && bun build ./demo/src/index.ts --outdir ./demo/dist && cp ./demo/src/index.html ./demo/dist/index.html",
+    "npm": "npm"
+  }
+}
